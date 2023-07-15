@@ -8,6 +8,7 @@ import com.google.api.services.sheets.v4.Sheets
 import com.google.api.services.sheets.v4.SheetsScopes
 import com.google.api.services.sheets.v4.model.AppendValuesResponse
 import com.google.api.services.sheets.v4.model.ValueRange
+import java.io.File
 import java.io.FileInputStream
 import java.lang.RuntimeException
 import java.math.BigDecimal
@@ -17,6 +18,7 @@ import java.time.format.DateTimeFormatter
 
 val JSON_FACTORY = JacksonFactory()
 val GOOGLE_KEY = System.getenv()["GOOGLE_KEY"]
+val GOOGLE_FILE = System.getenv()["GOOGLE_FILE"]
 val SPREADSHEET_ID = System.getenv()["SHEET_ID"]
 
 fun addDataToGoogleDocs(amount: BigDecimal, category: String, localDate: LocalDate) {
@@ -40,8 +42,15 @@ fun addDataToGoogleDocs(amount: BigDecimal, category: String, localDate: LocalDa
 
 fun prepare(): Sheets {
     val httpTransport: HttpTransport = GoogleNetHttpTransport.newTrustedTransport()
+
+    val stream = if(GOOGLE_KEY!=null){
+        GOOGLE_KEY.byteInputStream()
+    } else {
+        File(GOOGLE_FILE).inputStream()
+    }
+
     val credential: GoogleCredential = GoogleCredential
-        .fromStream(GOOGLE_KEY!!.byteInputStream())
+        .fromStream(stream)
         .createScoped(SheetsScopes.all())
     return Sheets.Builder(httpTransport, JSON_FACTORY, credential).build()
 }

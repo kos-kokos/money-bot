@@ -66,6 +66,7 @@ fun processMessage(text: String, chatId: ChatId, bot: Bot) {
             chatId = chatId,
             text = "Все хуйня, давай по-новой ${e.message}"
         )
+        e.printStackTrace()
     }
 }
 
