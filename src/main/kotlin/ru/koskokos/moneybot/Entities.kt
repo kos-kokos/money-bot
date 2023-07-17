@@ -13,5 +13,6 @@ enum class Category(val names: List<String>) {
     FLAT(listOf("квартира")),
     HOBBY(listOf("хобби")),
     RENOVATION(listOf("ремонт")),
-    TRAVEL(listOf("путешествие"))
+    TRAVEL(listOf("путешествие")),
+    MEDICINE(listOf("медицина", "аптека", "лекартсва", "врач"))
 }
