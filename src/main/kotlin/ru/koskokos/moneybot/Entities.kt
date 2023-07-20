@@ -14,5 +14,7 @@ enum class Category(val names: List<String>) {
     HOBBY(listOf("хобби")),
     RENOVATION(listOf("ремонт")),
     TRAVEL(listOf("путешествие")),
-    MEDICINE(listOf("медицина", "аптека", "лекартсва", "врач"))
+    MEDICINE(listOf("медицина", "аптека", "лекартсва", "врач")),
+    DEVICES(listOf("электроника", "бытовая техника")),
+    SERVICES(listOf("подписки", "сотовая связь", "связь"))
 }
